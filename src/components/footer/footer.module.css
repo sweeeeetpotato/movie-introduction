@@ -1,0 +1,11 @@
+.footer {
+  width: 100%;
+}
+.copyright {
+  padding: 30px;
+  margin-top: 50px;
+  color: lightgray;
+  font-style: italic;
+  text-align: right;
+  box-sizing: border-box;
+}

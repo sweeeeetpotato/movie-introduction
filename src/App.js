@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
+import SearchResult from "pages/SearchResult";
 import MovieDetail from "pages/Detail";
 import "common/reset.css";
 import "common/style.css";
@@ -9,7 +10,7 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home />}></Route>
-        <Route path="/search"></Route>
+        <Route path="/search" element={<SearchResult />}></Route>
         <Route path="/detail/:movieId" element={<MovieDetail />}></Route>
       </Routes>
     </BrowserRouter>

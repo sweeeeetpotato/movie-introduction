@@ -11,6 +11,12 @@
   flex-wrap: wrap;
   gap: 30px;
 }
+.loading_text {
+  font-size: 3rem;
+  font-style: italic;
+  line-height: 2;
+  margin: 0 auto;
+}
 .content_wrapper {
   min-width: 350px;
   width: 60%;

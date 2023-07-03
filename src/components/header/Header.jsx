@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import styles from "./header.module.css";
 
@@ -7,12 +7,19 @@ export default function Header() {
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const query = queryParams.get("query");
-  const [serachTerm, setSerachTerm] = useState("");
+  const [searchTerm, setSearchTerm] = useState("");
+  const inputRef = useRef(null);
 
   const handleSearch = (searchTerm) => {
-    setSerachTerm(searchTerm);
-    navigate(`/search?query=${searchTerm}`)
+    setSearchTerm(searchTerm);
+    navigate(`/search?query=${searchTerm}`);
   };
+
+  useEffect(() => {
+    if(query) {
+      inputRef.current.focus();
+    } 
+  }, [query]);
 
   return (
     <header className={styles.header}>
@@ -23,8 +30,9 @@ export default function Header() {
         type="text"
         className={styles.input}
         placeholder="검색어를 입력하세요."
-        value={query ? query : serachTerm}
+        value={query ? query : searchTerm}
         onChange={(e) => handleSearch(e.target.value)}
+        ref={inputRef}
       />
     </header>
   );

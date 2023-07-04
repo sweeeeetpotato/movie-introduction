@@ -7,7 +7,7 @@ export default function MovieCarousel() {
   const API_URL =
     "https://yts.mx/api/v2/list_movies.json?minimum_rating=8.8&sort_by=year";
   const navigate = useNavigate();
-  const { data, loading } = useAxiosMovies(API_URL);
+  const { data, loading, error } = useAxiosMovies(API_URL);
   const [moviesInfo, setMoviesInfo] = useState([]);
   const [sliderIndex, setSliderIndex] = useState(0);
   const [sliderStyle, setSliderStyle] = useState({});
@@ -56,6 +56,7 @@ export default function MovieCarousel() {
   return (
     <section className={styles.container}>
       <div className={styles.movie_carousel}>
+        {error && <p className={styles.error_message}>{error}</p>}
         {loading ? (
           <p className={styles.loading_text}>Loading...</p>
         ) : (

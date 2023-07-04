@@ -11,6 +11,13 @@
   flex-wrap: wrap;
   gap: 30px;
 }
+.error_message {
+  font-size: 2rem;
+  font-style: italic;
+  color: red;
+  line-height: 2;
+  margin: 0 auto;
+}
 .loading_text {
   font-size: 3rem;
   font-style: italic;

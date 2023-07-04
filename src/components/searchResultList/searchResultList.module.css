@@ -6,9 +6,13 @@
   gap: 30px;
   color: white;
 }
+.error_message {
+  color: red;
+}
+.error_message,
 .loading_text,
 .result_text {
-  font-size: 3rem;
+  font-size: 2rem;
   font-style: italic;
   line-height: 2;
   margin: 0 auto;

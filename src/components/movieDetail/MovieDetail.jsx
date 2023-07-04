@@ -6,7 +6,7 @@ import styles from "./movieDetail.module.css";
 export default function MovieDetail() {
   const { movieId } = useParams();
   const API_URL = `https://yts.mx/api/v2/movie_details.json?movie_id=${movieId}`;
-  const { data, loading } = useAxiosMovies(API_URL);
+  const { data, loading, error } = useAxiosMovies(API_URL);
   const [detail, setDetail] = useState({});
 
   useEffect(() => {
@@ -15,6 +15,7 @@ export default function MovieDetail() {
 
   return (
     <section className={styles.container}>
+      {error && <p className={styles.error_message}>{error}</p>}
       {loading ? (
         <p className={styles.loading_text}>Loading...</p>
       ) : (

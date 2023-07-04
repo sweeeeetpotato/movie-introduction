@@ -10,7 +10,7 @@ export default function SearchResultList() {
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const query = queryParams.get("query");
-  const { data, loading } = useAxiosMovies(API_URL);
+  const { data, loading, error } = useAxiosMovies(API_URL);
   const [moviesInfo, setMoviesInfo] = useState([]);
   const [filteredMovies, setFilteredMovies] = useState([]);
 
@@ -40,6 +40,7 @@ export default function SearchResultList() {
 
   return (
     <section className={styles.container}>
+      {error && <p className={styles.error_message}>{error}</p>}
       {loading ? (
         <p className={styles.loading_text}>검색중...</p>
       ) : !filteredMovies.length ? (

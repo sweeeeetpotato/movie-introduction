@@ -1,14 +1,11 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useAxiosMovies } from "customHook/useAxiosMovies";
 import styles from "./movieCarousel.module.css";
+import left_arrow from "../../assets/left-arrow.png";
+import right_arrow from "../../assets/right-arrow.png";
 
-export default function MovieCarousel() {
-  const API_URL =
-    "https://yts.mx/api/v2/list_movies.json?minimum_rating=8.8&sort_by=year";
+export default function MovieCarousel({data, error}) {
   const navigate = useNavigate();
-  const { data, loading, error } = useAxiosMovies(API_URL);
-  const [moviesInfo, setMoviesInfo] = useState([]);
   const [sliderIndex, setSliderIndex] = useState(0);
   const [sliderStyle, setSliderStyle] = useState({});
   const [visibleItems, setVisibleItems] = useState(0);
@@ -23,18 +20,11 @@ export default function MovieCarousel() {
     }
   };
   const handleRightBtn = () => {
-    if (sliderIndex + 7 < moviesInfo.length) {
+    if (sliderIndex + visibleItems < data.movies.length) {
       setSliderIndex(sliderIndex + visibleItems);
       leftBtnRef.current.style.display = "block";
     }
   };
-
-  useEffect(() => {
-    data &&
-      setMoviesInfo(
-        data.movies.map((val) => [val.medium_cover_image, val.title, val.id])
-      );
-  }, [data]);
 
   const handleMovieClick = (movieId) => {
     navigate(`/detail/${movieId}`);
@@ -52,12 +42,12 @@ export default function MovieCarousel() {
     if (sliderIndex === 0 && leftBtnRef.current) {
       leftBtnRef.current.style.display = "none";
     } else if (
-      sliderIndex + visibleItems > moviesInfo.length &&
+      sliderIndex + visibleItems >= data?.movies.length &&
       rightBtnRef.current
     ) {
       rightBtnRef.current.style.display = "none";
     }
-  }, [sliderIndex, moviesInfo, visibleItems]);
+  }, [sliderIndex, visibleItems, data]);
 
   useEffect(() => {
     // 영화 목록 캐러셀이 화면 크기에 따라 현재 몇개 보이는지 계산하는 함수
@@ -68,7 +58,7 @@ export default function MovieCarousel() {
       const visibleGap = Math.floor(carouselWidth % itemWidth);
       visibleGap < 230
         ? setVisibleItems(visibleItems)
-        : setVisibleItems(visibleItems+1);
+        : setVisibleItems(visibleItems + 1);
     };
 
     calculateVisibleItems();
@@ -85,45 +75,47 @@ export default function MovieCarousel() {
     <section className={styles.container}>
       <div className={styles.movie_carousel} ref={carouselRef}>
         {error && <p className={styles.error_message}>{error}</p>}
-        {loading ? (
-          <p className={styles.loading_text}>Loading...</p>
-        ) : (
-          moviesInfo.map((val) => (
-            <article
-              className={styles.movie_box}
-              style={sliderStyle}
-              key={val[2]}
-              onClick={() => {
-                handleMovieClick(val[2]);
-              }}
-            >
-              <img
-                src={val[0]}
-                alt={`영화 ${val[1]} 포스터`}
-                className={styles.movie_img}
-                onError={(e) => (e.target.parentNode.style.display = "none")}
-              />
-              <p className={styles.movie_title}>{val[1]}</p>
-            </article>
-          ))
-        )}
+        {data.movies.map((movie) => (
+          <article
+            className={styles.movie_box}
+            style={sliderStyle}
+            key={movie.title}
+            onClick={() => {
+              handleMovieClick(movie.id);
+            }}
+          >
+            <img
+              src={movie.medium_cover_image}
+              alt={`영화 ${movie.title} 포스터`}
+              className={styles.movie_img}
+              onError={(e) =>
+                (e.target.src = `https://dummyimage.com/230x345&text=${movie.title}`)
+              }
+            />
+            <p className={styles.movie_title}>{movie.title}</p>
+          </article>
+        ))}
       </div>
-      {!loading && (
-        <>
-          <button
-            type="button"
-            className={`${styles.btn} ${styles.left_btn}`}
-            onClick={() => handleLeftBtn()}
-            ref={leftBtnRef}
-          >{`<`}</button>
-          <button
-            type="button"
-            className={`${styles.btn} ${styles.right_btn}`}
-            onClick={() => handleRightBtn()}
-            ref={rightBtnRef}
-          >{`>`}</button>
-        </>
-      )}
+      <button
+        type="button"
+        className={`${styles.btn} ${styles.left_btn}`}
+        onClick={() => handleLeftBtn()}
+        ref={leftBtnRef}
+      >
+        <img src={left_arrow} alt="왼쪽 화살표" className={styles.button_img} />
+      </button>
+      <button
+        type="button"
+        className={`${styles.btn} ${styles.right_btn}`}
+        onClick={() => handleRightBtn()}
+        ref={rightBtnRef}
+      >
+        <img
+          src={right_arrow}
+          alt="오른쪽 화살표"
+          className={styles.button_img}
+        />
+      </button>
     </section>
   );
 }

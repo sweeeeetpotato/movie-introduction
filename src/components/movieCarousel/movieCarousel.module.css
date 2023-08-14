@@ -1,7 +1,7 @@
 .container {
   position: relative;
   width: 100%;
-  padding: 50px 80px;
+  padding: 0 80px;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
@@ -21,13 +21,7 @@
   line-height: 2;
   margin: 0 auto;
 }
-.loading_text {
-  font-size: 3rem;
-  font-style: italic;
-  line-height: 2;
-  margin: 0 auto;
-}
-.movie_box{
+.movie_box {
   flex: 0 0 230px;
   width: 230px;
   height: 400px;
@@ -41,21 +35,19 @@
   margin-top: 10px;
 }
 .btn {
-  width: 60px;
-  height: 60px;
-  padding: 0 5px 20px 0;
-  box-sizing: border-box;
+  width: 40px;
+  height: 40px;
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  color: white;
-  font-size: 3rem;
-  font-weight: bold;
-  border-radius: 10px;
 }
 .left_btn {
-  left: 0;
+  left: 20px;
 }
 .right_btn {
-  right: 0;
+  right: 20px;
+}
+.button_img {
+  width: 40px;
+  height: 40px;
 }

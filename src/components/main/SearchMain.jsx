@@ -1,6 +1,6 @@
 import React from "react";
 import SearchResultList from "components/searchResultList/SearchResultList";
-import styles from "./searchMain.module.css";
+import styles from "./main.module.css";
 
 export default function SearchResultMain() {
   return (

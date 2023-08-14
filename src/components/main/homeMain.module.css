@@ -1,0 +1,33 @@
+.main {
+  width: 100%;
+  margin-top: 150px;
+}
+.button_box {
+  display: flex;
+  gap: 20px;
+  padding: 40px 80px 30px;
+}
+.button {
+  width: 30px;
+}
+.left_btn {
+  margin-left: auto;
+}
+.button_img {
+  width: 30px;
+  height: 30px;
+  opacity: 0.6;
+}
+.button_img:hover {
+  opacity: 1;
+}
+.loading_text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 3rem;
+  font-style: italic;
+  text-align: center;
+  color: white;
+}

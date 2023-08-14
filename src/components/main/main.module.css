@@ -1,6 +1,9 @@
 .main {
   width: 100%;
   margin-top: 150px;
+}
+
+.detail_main {
   display: flex;
   flex-direction: column;
   align-items: center;

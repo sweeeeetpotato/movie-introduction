@@ -1,6 +1,6 @@
 import React from "react";
 import Header from "components/header/Header";
-import SearchResultMain from "components/searchMain/SearchMain";
+import SearchResultMain from "components/main/SearchMain";
 import Footer from "components/footer/Footer";
 
 export default function SearchResult() {

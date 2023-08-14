@@ -1,6 +1,6 @@
 import React from "react";
 import Header from "../components/header/Header";
-import HomeMain from "components/homeMain/HomeMain";
+import HomeMain from "components/main/HomeMain";
 import Footer from "../components/footer/Footer";
 
 export default function Home() {

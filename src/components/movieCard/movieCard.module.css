@@ -1,0 +1,26 @@
+.movie_box {
+  justify-self: center;
+  align-self: center;
+  width: 230px;
+  height: 400px;
+  cursor: pointer;
+}
+.movie_img {
+  border-radius: 10px;
+}
+.movie_title {
+  margin-top: 10px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.rating_box {
+  display: flex;
+  line-height: 2;
+  align-items: center;
+  gap: 5px;
+}
+.rating_img {
+  width: 16px;
+  height: 16px;
+}

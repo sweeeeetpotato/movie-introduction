@@ -1,11 +1,10 @@
 import React, { useEffect, useRef, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import styles from "./movieCarousel.module.css";
 import left_arrow from "../../assets/left-arrow.png";
 import right_arrow from "../../assets/right-arrow.png";
+import MovieCard from "components/movieCard/MovieCard";
 
-export default function MovieCarousel({data, error}) {
-  const navigate = useNavigate();
+export default function MovieCarousel({ data, error }) {
   const [sliderIndex, setSliderIndex] = useState(0);
   const [sliderStyle, setSliderStyle] = useState({});
   const [visibleItems, setVisibleItems] = useState(0);
@@ -24,10 +23,6 @@ export default function MovieCarousel({data, error}) {
       setSliderIndex(sliderIndex + visibleItems);
       leftBtnRef.current.style.display = "block";
     }
-  };
-
-  const handleMovieClick = (movieId) => {
-    navigate(`/detail/${movieId}`);
   };
 
   // 영화목록 캐러셀에서 버튼 클릭시 이전 목록 or 다음 목록을 보여주는 코드
@@ -76,24 +71,7 @@ export default function MovieCarousel({data, error}) {
       <div className={styles.movie_carousel} ref={carouselRef}>
         {error && <p className={styles.error_message}>{error}</p>}
         {data.movies.map((movie) => (
-          <article
-            className={styles.movie_box}
-            style={sliderStyle}
-            key={movie.title}
-            onClick={() => {
-              handleMovieClick(movie.id);
-            }}
-          >
-            <img
-              src={movie.medium_cover_image}
-              alt={`영화 ${movie.title} 포스터`}
-              className={styles.movie_img}
-              onError={(e) =>
-                (e.target.src = `https://dummyimage.com/230x345&text=${movie.title}`)
-              }
-            />
-            <p className={styles.movie_title}>{movie.title}</p>
-          </article>
+          <MovieCard movie={movie} sliderStyle={sliderStyle} />
         ))}
       </div>
       <button

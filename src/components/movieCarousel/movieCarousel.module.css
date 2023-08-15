@@ -21,19 +21,6 @@
   line-height: 2;
   margin: 0 auto;
 }
-.movie_box {
-  flex: 0 0 230px;
-  width: 230px;
-  height: 400px;
-  cursor: pointer;
-}
-.movie_img {
-  border-radius: 10px;
-}
-.movie_title {
-  font-weight: bold;
-  margin-top: 10px;
-}
 .btn {
   width: 40px;
   height: 40px;

@@ -1,6 +1,21 @@
+.loading_text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 3rem;
+  font-style: italic;
+  text-align: center;
+  color: white;
+}
 .main {
   width: 100%;
   margin-top: 150px;
+  color: white;
+}
+.title {
+  font-size: 2rem;
+  font-weight: bold;
 }
 .button_box {
   display: flex;
@@ -20,14 +35,4 @@
 }
 .button_img:hover {
   opacity: 1;
-}
-.loading_text {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 3rem;
-  font-style: italic;
-  text-align: center;
-  color: white;
 }

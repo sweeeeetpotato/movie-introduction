@@ -3,13 +3,13 @@ import { useNavigate } from "react-router-dom";
 import rating_icon from "../../assets/rating-icon.png";
 import styles from "./movieCard.module.css";
 
-export default function MovieCard({ movie, sliderStyle }) {
+export default function MovieCard({ data, sliderStyle }) {
   const navigate = useNavigate();
   const handleMovieClick = (movieId) => {
     navigate(`/detail/${movieId}`);
   };
 
-  return (
+  return data.movies.map((movie) => (
     <article
       className={styles.movie_box}
       style={sliderStyle}
@@ -36,5 +36,5 @@ export default function MovieCard({ movie, sliderStyle }) {
         <span>{movie.rating / 2}</span>
       </div>
     </article>
-  );
+  ));
 }

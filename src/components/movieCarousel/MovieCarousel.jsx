@@ -70,9 +70,7 @@ export default function MovieCarousel({ data, error }) {
     <section className={styles.container}>
       <div className={styles.movie_carousel} ref={carouselRef}>
         {error && <p className={styles.error_message}>{error}</p>}
-        {data.movies.map((movie) => (
-          <MovieCard movie={movie} sliderStyle={sliderStyle} />
-        ))}
+        <MovieCard data={data} sliderStyle={sliderStyle} />
       </div>
       <button
         type="button"

@@ -6,9 +6,7 @@ export default function MovieGrid({ data, error }) {
   return (
     <section className={styles.container}>
       {error && <p className={styles.error_message}>{error}</p>}
-      {data.movies.map((movie) => (
-        <MovieCard movie={movie} />
-      ))}
+      <MovieCard data={data} />
     </section>
   );
 }

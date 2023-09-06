@@ -2,13 +2,13 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import rating_icon from "../../assets/rating-icon.png";
 import MovieSuggestions from "components/movieSuggestions/MovieSuggestions";
-import { useApiData } from "customHook/useApiData";
+import { useMovieSWR } from "customHook/useMovieSWR";
 import styles from "./movieDetail.module.css";
 
 export default function MovieDetail() {
   const { movieId } = useParams();
   const API_URL = `https://yts.mx/api/v2/movie_details.json?movie_id=${movieId}`;
-  const { data, isLoading, error } = useApiData(API_URL);
+  const { data, isLoading, error } = useMovieSWR(API_URL);
 
   return (
     <section className={styles.container}>

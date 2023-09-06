@@ -1,12 +1,12 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { useApiData } from "customHook/useApiData";
+import { useMovieSWR } from "customHook/useMovieSWR";
 import styles from "./movieSuggestions.module.css";
 
 export default function MovieSuggestions({ movieId }) {
   const navigate = useNavigate();
   const API_URL = `https://yts.mx/api/v2/movie_suggestions.json?movie_id=${movieId}`;
-  const { data, isLoading, error } = useApiData(API_URL);
+  const { data, isLoading, error } = useMovieSWR(API_URL);
 
   const handleMovieClick = (movieId) => {
     navigate(`/detail/${movieId}`);

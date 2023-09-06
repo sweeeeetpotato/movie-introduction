@@ -1,13 +1,18 @@
 import React from "react";
-// import ReactDOM from 'react-dom'; //구버전
 import { createRoot } from "react-dom/client";
 import App from "./App";
 import { SWRConfig } from "swr";
+import axios from "axios";
 
 const container = document.getElementById("root");
 const root = createRoot(container);
 root.render(
-  <SWRConfig>
+  <SWRConfig
+    value={{
+      fetcher: async (API_URL) =>
+        await axios.get(API_URL).then((res) => res.data),
+    }}
+  >
     <App />
   </SWRConfig>
 );

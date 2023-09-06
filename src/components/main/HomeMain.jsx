@@ -4,15 +4,15 @@ import MovieGrid from "components/movieGrid/MovieGrid";
 import caroucel_icon from "../../assets/caroucel-icon.png";
 import grid_icon from "../../assets/grid-icon.png";
 import styles from "./homeMain.module.css";
-import { useAxiosMovies } from "customHook/useAxiosMovies";
+import { useApiData } from "customHook/useApiData";
 
 export default function HomeMain() {
   const API_URL =
     "https://yts.mx/api/v2/list_movies.json?minimum_rating=8.8&sort_by=year&page=1";
-  const { data, loading, error } = useAxiosMovies(API_URL);
-  const [visibilityMode, setVisibilityMode] = useState("carousel");
+  const { data, isLoading, error } = useApiData(API_URL);
+  const [visibilityMode, setVisibilityMode] = useState("grid");
 
-  return loading ? (
+  return isLoading ? (
     <p className={styles.loading_text}>Loading...</p>
   ) : (
     <main className={styles.main}>

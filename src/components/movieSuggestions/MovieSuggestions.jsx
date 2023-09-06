@@ -1,13 +1,12 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { useAxiosMovies } from "customHook/useAxiosMovies";
+import { useApiData } from "customHook/useApiData";
 import styles from "./movieSuggestions.module.css";
 
 export default function MovieSuggestions({ movieId }) {
   const navigate = useNavigate();
   const API_URL = `https://yts.mx/api/v2/movie_suggestions.json?movie_id=${movieId}`;
-  const { data, loading, error } = useAxiosMovies(API_URL);
-  console.log(data);
+  const { data, isLoading, error } = useApiData(API_URL);
 
   const handleMovieClick = (movieId) => {
     navigate(`/detail/${movieId}`);
@@ -16,7 +15,7 @@ export default function MovieSuggestions({ movieId }) {
   return (
     <aside className={styles.aside}>
       {error && <p className={styles.error_message}>{error}</p>}
-      {loading ? (
+      {isLoading ? (
         <p className={styles.loading_text}>Loading...</p>
       ) : (
         <>

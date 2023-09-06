@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { useAxiosMovies } from "customHook/useAxiosMovies";
+import { useApiData } from "customHook/useApiData";
 import styles from "./searchResultList.module.css";
 
 export default function SearchResultList() {
@@ -10,7 +10,7 @@ export default function SearchResultList() {
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const query = queryParams.get("query");
-  const { data, loading, error } = useAxiosMovies(API_URL);
+  const { data, isLoading, error } = useApiData(API_URL);
   const [moviesInfo, setMoviesInfo] = useState([]);
   const [filteredMovies, setFilteredMovies] = useState([]);
 
@@ -41,7 +41,7 @@ export default function SearchResultList() {
   return (
     <section className={styles.container}>
       {error && <p className={styles.error_message}>{error}</p>}
-      {loading ? (
+      {isLoading ? (
         <p className={styles.loading_text}>검색중...</p>
       ) : !filteredMovies.length ? (
         <p className={styles.result_text}>

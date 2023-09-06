@@ -1,19 +1,19 @@
 import React from "react";
 import { useParams } from "react-router-dom";
-import { useAxiosMovies } from "customHook/useAxiosMovies";
 import rating_icon from "../../assets/rating-icon.png";
-import styles from "./movieDetail.module.css";
 import MovieSuggestions from "components/movieSuggestions/MovieSuggestions";
+import { useApiData } from "customHook/useApiData";
+import styles from "./movieDetail.module.css";
 
 export default function MovieDetail() {
   const { movieId } = useParams();
   const API_URL = `https://yts.mx/api/v2/movie_details.json?movie_id=${movieId}`;
-  const { data, loading, error } = useAxiosMovies(API_URL);
+  const { data, isLoading, error } = useApiData(API_URL);
 
   return (
     <section className={styles.container}>
       {error && <p className={styles.error_message}>{error}</p>}
-      {loading ? (
+      {isLoading ? (
         <p className={styles.loading_text}>Loading...</p>
       ) : (
         <>
@@ -43,7 +43,9 @@ export default function MovieDetail() {
                 </span>
               ))}
             </div>
-            <p className={styles.description_text}>{data.movie.description_full}</p>
+            <p className={styles.description_text}>
+              {data.movie.description_full}
+            </p>
           </div>
           <MovieSuggestions movieId={movieId} />
         </>

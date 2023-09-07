@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import Menu from "components/menu/Menu";
 import styles from "./header.module.css";
 import close from "../../assets/close.png";
 
@@ -27,6 +28,7 @@ export default function Header() {
       <Link to="/" className={styles.link}>
         FILMFLIX
       </Link>
+      <Menu />
       <label htmlFor="search" className={styles.inputBox}>
         <input
           type="text"

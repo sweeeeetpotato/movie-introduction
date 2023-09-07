@@ -7,3 +7,9 @@
   padding: 0 100px;
   color: white;
 }
+.title {
+  width: 980px;
+  margin: 50px auto 35px;
+  font-size: 2rem;
+  font-weight: bold;
+}

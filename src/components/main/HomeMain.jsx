@@ -1,63 +1,47 @@
 import React, { useEffect, useState } from "react";
 import MovieCarousel from "components/movieCarousel/MovieCarousel";
-import MovieGrid from "components/movieGrid/MovieGrid";
 import { useMovieSWR } from "customHook/useMovieSWR";
-import { useMovieSWRInfinite } from "customHook/useMovieSWRInfinite";
-import caroucel_icon from "../../assets/caroucel-icon.png";
-import grid_icon from "../../assets/grid-icon.png";
 import styles from "./homeMain.module.css";
 
 export default function HomeMain() {
-  const API_URL = `https://yts.mx/api/v2/list_movies.json?minimum_rating=8&sort_by=year&limit=20&page=1`;
-  const { data, isLoading, error } = useMovieSWR(API_URL);
-  const { data: allMovieArr, setSize } = useMovieSWRInfinite();
-  const [visibilityMode, setVisibilityMode] = useState("grid");
+  const API_URL = (sort) => {
+    return `https://yts.mx/api/v2/list_movies.json?minimum_rating=8&sort_by=${sort}&limit=50`;
+  };
+
+  const { data: latestData } = useMovieSWR(API_URL("year"));
+  const { data: highestData } = useMovieSWR(API_URL("rating"));
+  const { data: popularData, error } = useMovieSWR(API_URL("like_count"));
+  const [latestMovies, setLatestMovies] = useState();
+  const [isLoading, setLoading] = useState(true);
 
   useEffect(() => {
-    data && setSize(Math.ceil(data?.movie_count / 20));
-  }, [data, setSize]);
+    latestData &&
+      setLatestMovies(latestData.movies.filter((movie) => movie.year === 2023));
+    latestMovies && highestData && popularData && setLoading(false);
+  }, [latestData, highestData, popularData, latestMovies]);
 
   return (
     <main className={styles.main}>
-      <div className={styles.button_box}>
-        <span className={styles.title}>영화 목록</span>
-        <button
-          type="button"
-          className={`${styles.button} ${styles.left_btn}`}
-          onClick={() => setVisibilityMode("carousel")}
-        >
-          <img
-            src={caroucel_icon}
-            alt="이미지 슬라이더 모드"
-            className={`${styles.button_img} ${
-              visibilityMode === "carousel" && styles.active_button_img
-            }`}
-          />
-        </button>
-        <button
-          type="button"
-          className={styles.button}
-          onClick={() => setVisibilityMode("grid")}
-        >
-          <img
-            src={grid_icon}
-            alt="그리드 모드"
-            className={`${styles.button_img} ${
-              visibilityMode === "grid" && styles.active_button_img
-            }`}
-          />
-        </button>
-      </div>
-      {visibilityMode === "carousel" && (
-        <MovieCarousel data={data} error={error} />
+      {error && (
+        <p className={`${styles.error_message} ${styles.text}`}>{error}</p>
       )}
-      {visibilityMode === "grid" && (
-        <MovieGrid
-          data={data}
-          error={error}
-          isLoading={isLoading}
-          allMovieArr={allMovieArr}
-        />
+      {isLoading ? (
+        <p className={`${styles.loading_text} ${styles.text}`}>Loading...</p>
+      ) : (
+        <ul className={styles.list}>
+          <li>
+            <h3 className={styles.title}>2023년도 인기 작품</h3>
+            <MovieCarousel data={latestMovies} />
+          </li>
+          <li>
+            <h3 className={styles.title}>고평점 작품</h3>
+            <MovieCarousel data={highestData?.movies} />
+          </li>
+          <li>
+            <h3 className={styles.title}>사람들이 가장 많이 찜한 작품</h3>
+            <MovieCarousel data={popularData?.movies} />
+          </li>
+        </ul>
       )}
     </main>
   );

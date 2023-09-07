@@ -4,7 +4,7 @@ import left_arrow from "../../assets/left-arrow.png";
 import right_arrow from "../../assets/right-arrow.png";
 import MovieCard from "components/movieCard/MovieCard";
 
-export default function MovieCarousel({ data, error }) {
+export default function MovieCarousel({ data }) {
   const [sliderIndex, setSliderIndex] = useState(0);
   const [sliderStyle, setSliderStyle] = useState({});
   const [visibleItems, setVisibleItems] = useState(0);
@@ -19,15 +19,30 @@ export default function MovieCarousel({ data, error }) {
     }
   };
   const handleRightBtn = () => {
-    if (sliderIndex + visibleItems < data.movies.length) {
+    if (sliderIndex + visibleItems < data.length) {
       setSliderIndex(sliderIndex + visibleItems);
       leftBtnRef.current.style.display = "block";
     }
+  };
+  const renderMoveButtons = ({ style, ref, onClick, src, alt }) => {
+    return (
+      <button
+        type="button"
+        className={`${styles.btn} ${style}`}
+        onClick={onClick}
+        ref={ref}
+      >
+        <img src={src} alt={alt} className={styles.button_img} />
+      </button>
+    );
   };
 
   // 영화목록 캐러셀에서 버튼 클릭시 이전 목록 or 다음 목록을 보여주는 코드
   useEffect(() => {
     setSliderStyle({
+      flex: "0 0 230px",
+      width: "230px",
+      height: "400px",
       transition: "all 0.5s ease-in-out",
       transform: `translateX(-${100 * sliderIndex}%) translateX(-${
         20 * sliderIndex
@@ -37,7 +52,7 @@ export default function MovieCarousel({ data, error }) {
     if (sliderIndex === 0 && leftBtnRef.current) {
       leftBtnRef.current.style.display = "none";
     } else if (
-      sliderIndex + visibleItems >= data?.movies.length &&
+      sliderIndex + visibleItems >= data?.length &&
       rightBtnRef.current
     ) {
       rightBtnRef.current.style.display = "none";
@@ -69,29 +84,22 @@ export default function MovieCarousel({ data, error }) {
   return (
     <section className={styles.container}>
       <div className={styles.movie_carousel} ref={carouselRef}>
-        {error && <p className={styles.error_message}>{error}</p>}
-        <MovieCard data={data} sliderStyle={sliderStyle} />
+        <MovieCard mode={"carousel"} data={data} sliderStyle={sliderStyle} />
       </div>
-      <button
-        type="button"
-        className={`${styles.btn} ${styles.left_btn}`}
-        onClick={() => handleLeftBtn()}
-        ref={leftBtnRef}
-      >
-        <img src={left_arrow} alt="왼쪽 화살표" className={styles.button_img} />
-      </button>
-      <button
-        type="button"
-        className={`${styles.btn} ${styles.right_btn}`}
-        onClick={() => handleRightBtn()}
-        ref={rightBtnRef}
-      >
-        <img
-          src={right_arrow}
-          alt="오른쪽 화살표"
-          className={styles.button_img}
-        />
-      </button>
+      {renderMoveButtons({
+        style: styles.left_btn,
+        ref: leftBtnRef,
+        onClick: () => handleLeftBtn(),
+        src: left_arrow,
+        alt: "왼쪽 화살표",
+      })}
+      {renderMoveButtons({
+        style: styles.right_btn,
+        ref: rightBtnRef,
+        onClick: () => handleRightBtn(),
+        src: right_arrow,
+        alt: "오른쪽 화살표",
+      })}
     </section>
   );
 }

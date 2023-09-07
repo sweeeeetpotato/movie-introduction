@@ -1,4 +1,4 @@
-.loading_text {
+.text {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -6,33 +6,26 @@
   font-size: 3rem;
   font-style: italic;
   text-align: center;
+}
+.loading_text {
   color: white;
+}
+.error_message {
+  color: red;
 }
 .main {
   width: 100%;
   margin-top: 80px;
   color: white;
 }
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
 .title {
+  margin: 50px 0 25px;
+  padding: 0 80px;
   font-size: 2rem;
   font-weight: bold;
-}
-.button_box {
-  display: flex;
-  gap: 20px;
-  padding: 40px 80px 30px;
-}
-.button {
-  width: 30px;
-}
-.left_btn {
-  margin-left: auto;
-}
-.button_img {
-  width: 30px;
-  height: 30px;
-  opacity: 0.5;
-}
-.active_button_img {
-  opacity: 1;
 }

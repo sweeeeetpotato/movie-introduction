@@ -4,6 +4,7 @@ import rating_icon from "../../assets/rating-icon.png";
 import styles from "./movieCard.module.css";
 
 export default function MovieCard({
+  mode,
   data,
   sliderStyle,
   pageIndex,
@@ -13,9 +14,12 @@ export default function MovieCard({
   const handleMovieClick = (movieId) => {
     navigate(`/detail/${movieId}`);
   };
-  const movieData = allMovieArr ? allMovieArr[pageIndex - 1].data : data;
+  const movieDataGrid = allMovieArr ? allMovieArr[pageIndex - 1].data : data;
+  const movieDataCarousel = data;
+  const renderMovieData =
+    mode === "grid" ? movieDataGrid.movies : movieDataCarousel;
 
-  return movieData?.movies.map((movie) => (
+  return renderMovieData?.map((movie) => (
     <article
       className={styles.movie_box}
       style={sliderStyle}
@@ -27,7 +31,9 @@ export default function MovieCard({
       <img
         src={movie.medium_cover_image}
         alt={`영화 ${movie.title} 포스터`}
-        className={styles.movie_img}
+        className={`${mode === "carousel" && styles.carouselStyle} ${
+          styles.movie_img
+        }`}
         onError={(e) =>
           (e.target.src = `https://dummyimage.com/230x345&text=${movie.title}`)
         }

@@ -1,12 +1,13 @@
 .movie_box {
   justify-self: center;
   align-self: center;
-  width: 230px;
-  height: 400px;
+  width: 180px;
+  height: 330px;
   cursor: pointer;
 }
 .movie_img {
-  border-radius: 10px;
+  border-radius: 5px;
+  width: 180px;
 }
 .movie_title {
   margin-top: 10px;

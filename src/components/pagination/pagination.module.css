@@ -1,0 +1,27 @@
+.container {
+  width: 100%;
+  margin-top: 50px;
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+}
+.moveBtn {
+  width: 20px;
+  height: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.pageBtn {
+  width: 20px;
+  height: 25px;
+  font-size: 1.2rem;
+  color: rgb(153, 153, 153);
+}
+.activePageBtn {
+  border-bottom: 1px solid gray;
+  color: white;
+}
+.arrowImg {
+  width: 20px;
+}

@@ -3,13 +3,19 @@ import { useNavigate } from "react-router-dom";
 import rating_icon from "../../assets/rating-icon.png";
 import styles from "./movieCard.module.css";
 
-export default function MovieCard({ data, sliderStyle }) {
+export default function MovieCard({
+  data,
+  sliderStyle,
+  pageIndex,
+  allMovieArr,
+}) {
   const navigate = useNavigate();
   const handleMovieClick = (movieId) => {
     navigate(`/detail/${movieId}`);
   };
+  const movieData = allMovieArr ? allMovieArr[pageIndex - 1].data : data;
 
-  return data.movies.map((movie) => (
+  return movieData?.movies.map((movie) => (
     <article
       className={styles.movie_box}
       style={sliderStyle}

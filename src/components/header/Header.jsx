@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import styles from "./header.module.css";
+import close from "../../assets/close.png";
 
 export default function Header() {
   const navigate = useNavigate();
@@ -16,9 +17,9 @@ export default function Header() {
   };
 
   useEffect(() => {
-    if(query) {
+    if (query) {
       inputRef.current.focus();
-    } 
+    }
   }, [query]);
 
   return (
@@ -26,14 +27,24 @@ export default function Header() {
       <Link to="/" className={styles.link}>
         FILMFLIX
       </Link>
-      <input
-        type="text"
-        className={styles.input}
-        placeholder="검색어를 입력하세요."
-        value={query ? query : searchTerm}
-        onChange={(e) => handleSearch(e.target.value)}
-        ref={inputRef}
-      />
+      <label htmlFor="search" className={styles.inputBox}>
+        <input
+          type="text"
+          className={styles.input}
+          placeholder="검색어를 입력하세요."
+          value={query ? query : searchTerm}
+          onChange={(e) => handleSearch(e.target.value)}
+          ref={inputRef}
+          id="search"
+        />
+        <button
+          type="button"
+          className={styles.closeBtn}
+          onClick={() => navigate("/")}
+        >
+          <img src={close} alt="검색어 지우기" className={styles.closeImg} />
+        </button>
+      </label>
     </header>
   );
 }

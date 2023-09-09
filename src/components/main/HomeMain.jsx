@@ -10,15 +10,13 @@ export default function HomeMain() {
 
   const { data: latestData } = useMovieSWR(API_URL("year"));
   const { data: highestData } = useMovieSWR(API_URL("rating"));
-  const { data: popularData, error } = useMovieSWR(API_URL("like_count"));
+  const { data: popularData, isLoading, error } = useMovieSWR(API_URL("like_count"));
   const [latestMovies, setLatestMovies] = useState();
-  const [isLoading, setLoading] = useState(true);
 
   useEffect(() => {
     latestData &&
       setLatestMovies(latestData.movies.filter((movie) => movie.year === 2023));
-    latestMovies && highestData && popularData && setLoading(false);
-  }, [latestData, highestData, popularData, latestMovies]);
+  }, [latestData]);
 
   return (
     <main className={styles.main}>

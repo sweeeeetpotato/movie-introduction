@@ -15,15 +15,19 @@ export default function MovieCard({
     navigate(`/detail/${movieId}`);
   };
   const movieDataGrid = allMovieArr ? allMovieArr[pageIndex - 1].data : data;
-  const movieDataCarousel = data;
-  const renderMovieData =
-    mode === "grid" ? movieDataGrid.movies : movieDataCarousel;
 
-  return renderMovieData?.map((movie) => (
+  const MOVIEDATA = {
+    grid: movieDataGrid?.movies,
+    carousel: data,
+  };
+
+  return MOVIEDATA[mode]?.map((movie) => (
     <article
-      className={styles.movie_box}
+      className={`${mode === "carousel" && styles.carousel_box} ${
+        styles.movie_box
+      }`}
       style={sliderStyle}
-      key={movie.title}
+      key={movie.id}
       onClick={() => {
         handleMovieClick(movie.id);
       }}
@@ -31,7 +35,7 @@ export default function MovieCard({
       <img
         src={movie.medium_cover_image}
         alt={`영화 ${movie.title} 포스터`}
-        className={`${mode === "carousel" && styles.carouselStyle} ${
+        className={`${mode === "carousel" && styles.carousel_img} ${
           styles.movie_img
         }`}
         onError={(e) =>

@@ -40,9 +40,6 @@ export default function MovieCarousel({ data }) {
   // 영화목록 캐러셀에서 버튼 클릭시 이전 목록 or 다음 목록을 보여주는 코드
   useEffect(() => {
     setSliderStyle({
-      flex: "0 0 230px",
-      width: "230px",
-      height: "400px",
       transition: "all 0.5s ease-in-out",
       transform: `translateX(-${100 * sliderIndex}%) translateX(-${
         20 * sliderIndex

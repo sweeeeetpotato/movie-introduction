@@ -1,14 +1,19 @@
 .movie_box {
-  flex: 0 0 230px;
-  justify-self: center;
-  align-self: center;
   width: 180px;
   height: 330px;
   cursor: pointer;
 }
+.carousel_box {
+  flex: 0 0 230px;
+  width: 230px;
+  height: 400px;
+}
 .movie_img {
   border-radius: 5px;
   width: 180px;
+}
+.carousel_img {
+  width: 230px;
 }
 .movie_title {
   margin-top: 10px;
@@ -25,7 +30,4 @@
 .rating_img {
   width: 16px;
   height: 16px;
-}
-.carouselStyle {
-  width: 230px;
 }

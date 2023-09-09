@@ -14,7 +14,7 @@ export default function Header() {
 
   const handleSearch = (searchTerm) => {
     setSearchTerm(searchTerm);
-    navigate(`/search?query=${searchTerm}`);
+    navigate(`/search?query=${encodeURIComponent(searchTerm)}`);
   };
 
   useEffect(() => {

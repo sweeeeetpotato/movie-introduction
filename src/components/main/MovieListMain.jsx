@@ -5,7 +5,7 @@ import { useMovieSWRInfinite } from "customHook/useMovieSWRInfinite";
 import styles from "./movieListMain.module.css";
 
 export default function MovieListMain() {
-  const API_URL = `https://yts.mx/api/v2/list_movies.json?minimum_rating=7.8&sort_by=year&limit=20&page=1`;
+  const API_URL = `https://yts.mx/api/v2/list_movies.json?minimum_rating=7&sort_by=year&limit=20&page=1`;
   const { data, isLoading, error } = useMovieSWR(API_URL);
   const { data: allMovieArr, setSize } = useMovieSWRInfinite();
 

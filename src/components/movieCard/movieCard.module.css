@@ -21,6 +21,9 @@
   overflow: hidden;
   text-overflow: ellipsis;
 }
+.searchTerm {
+  color: red;
+}
 .rating_box {
   display: flex;
   line-height: 2;

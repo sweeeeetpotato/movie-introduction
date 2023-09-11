@@ -9,6 +9,7 @@ export default function MovieCard({
   sliderStyle,
   pageIndex,
   allMovieArr,
+  query,
 }) {
   const navigate = useNavigate();
   const handleMovieClick = (movieId) => {
@@ -19,6 +20,21 @@ export default function MovieCard({
   const MOVIEDATA = {
     grid: movieDataGrid?.movies,
     carousel: data,
+    search: data?.movies,
+  };
+
+  const renderSearchTitle = (movie) => {
+    const index = movie.title.toLowerCase().indexOf(query);
+
+    return (
+      <>
+        {movie.title.substr(0, index)}
+        <span className={styles.searchTerm}>
+          {movie.title.substr(index, query.length)}
+        </span>
+        {movie.title.substr(index + query.length)}
+      </>
+    );
   };
 
   return MOVIEDATA[mode]?.map((movie) => (
@@ -42,7 +58,9 @@ export default function MovieCard({
           (e.target.src = `https://dummyimage.com/230x345&text=${movie.title}`)
         }
       />
-      <p className={styles.movie_title}>{movie.title}</p>
+      <p className={styles.movie_title}>
+        {mode === "search" ? renderSearchTitle(movie) : movie.title}
+      </p>
       <div className={styles.rating_box}>
         <img
           src={rating_icon}

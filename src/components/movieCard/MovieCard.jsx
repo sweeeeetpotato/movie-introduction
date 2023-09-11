@@ -24,7 +24,7 @@ export default function MovieCard({
   };
 
   const renderSearchTitle = (movie) => {
-    const index = movie.title.toLowerCase().indexOf(query);
+    const index = movie.title.toLowerCase().indexOf(query.toLowerCase());
 
     return (
       <>

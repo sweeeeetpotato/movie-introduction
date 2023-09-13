@@ -1,0 +1,47 @@
+.dropdown_selectbox {
+  width: 170px;
+  font-size: 0.9rem;
+}
+.dropdown_btn {
+  position: relative;
+  height: 35px;
+  padding: 0 15px;
+  border: 1px solid white;
+  border-radius: 5px;
+  color: white;
+  text-align: start;
+}
+.dropdown_btn::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: 15px;
+  transform: translate(0, -50%);
+  width: 10px;
+  height: 10px;
+  background: url("../../assets/down-arrow.png") no-repeat center;
+}
+.active_dropdown_btn::after {
+  background: url("../../assets/up-arrow.png") no-repeat center;
+}
+.list_selectbox {
+  display: none;
+}
+.active_list_selectbox {
+  width: 170px;
+  position: absolute;
+  display: block;
+  border: 1px solid white;
+  border-radius: 5px;
+  background-color: #1b1b1b;
+}
+.optionItem {
+  height: 35px;
+  padding: 0 15px;
+  border-radius: 5px;
+  color: white;
+  text-align: start;
+}
+.optionItem:hover {
+  background-color: rgb(56, 56, 56);
+}

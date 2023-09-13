@@ -1,14 +1,36 @@
 <!DOCTYPE html>
 <html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>React App</title>
+    <link
+      rel="preload"
+      href="https://yts.mx/api/v2/list_movies.json?minimum_rating=8&sort_by=year&limit=50"
+      as="fetch"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="preload"
+      href="https://yts.mx/api/v2/list_movies.json?minimum_rating=8&sort_by=rating&limit=50"
+      as="fetch"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="preload"
+      href="https://yts.mx/api/v2/list_movies.json?minimum_rating=8&sort_by=like_count&limit=50"
+      as="fetch"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="preload"
+      href="https://yts.mx/api/v2/list_movies.json?minimum_rating=7&sort_by=year&limit=20&page=1"
+      as="fetch"
+      crossorigin="anonymous"
+    />
+  </head>
 
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>React App</title>
-</head>
-
-<body>
-  <div id="root"></div>
-</body>
-
+  <body>
+    <div id="root"></div>
+  </body>
 </html>

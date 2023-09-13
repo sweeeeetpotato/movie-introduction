@@ -28,7 +28,7 @@ export default function Pagination({ movieCount, pageIndex, setPageIndex }) {
     const buttons = [];
     const startIndex = Math.floor((pageIndex - 1) / 10) * 10 + 1;
     const endIndex = Math.min(startIndex + 9, pageCount);
-    
+
     for (let i = startIndex; i <= endIndex; i++) {
       buttons.push(
         <button
@@ -57,7 +57,9 @@ export default function Pagination({ movieCount, pageIndex, setPageIndex }) {
         src: leftArrow,
         alt: "이전 페이지",
         onClick: () =>
-          setPageIndex((prev) => (prev === 1 ? prev : Math.floor(prev - 10))),
+          setPageIndex((prev) =>
+            prev === 1 ? prev : Math.floor((prev - 10) / 10) * 10 + 1
+          ),
       })}
       {renderPageButtons()}
       {renderMoveButtons({
@@ -65,7 +67,7 @@ export default function Pagination({ movieCount, pageIndex, setPageIndex }) {
         alt: "다음 페이지",
         onClick: () =>
           setPageIndex((prev) =>
-            prev === pageCount ? prev : Math.floor(prev + 10)
+            prev === pageCount ? prev : Math.floor((prev + 10) / 10) * 10 + 1
           ),
       })}
       {renderMoveButtons({

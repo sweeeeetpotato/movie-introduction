@@ -7,18 +7,15 @@ export default function MovieCard({
   mode,
   data,
   sliderStyle,
-  pageIndex,
-  allMovieArr,
   query,
 }) {
   const navigate = useNavigate();
   const handleMovieClick = (movieId) => {
     navigate(`/detail/${movieId}`);
   };
-  const movieDataGrid = allMovieArr ? allMovieArr[pageIndex - 1].data : data;
 
   const MOVIEDATA = {
-    grid: movieDataGrid?.movies,
+    grid: data?.movies,
     carousel: data,
     search: data?.movies,
   };

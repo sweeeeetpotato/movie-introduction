@@ -1,16 +1,23 @@
 import React, { useState } from "react";
 import styles from "./selectBox.module.css";
 
-export default function SelectBox() {
+export default function SelectBox({ setSortOrder }) {
   const [isSelectBox, setSelectBox] = useState(false);
-  const [selectItemName, SetSelectItemName] = useState("정렬기준");
-
+  const [selectItemName, setSelectItemName] = useState("정렬기준");
+  const SORT = {
+    "연도순(dafault)": ["year", "desc"],
+    인기순: ["like_count", "desc"],
+    평점순: ["rating", "desc"],
+    "제목순(오름차순)": ["title", "asc"],
+    "제목순(내림차순)": ["title", "desc"],
+  };
   const handleSelectBox = () => {
     isSelectBox ? setSelectBox(false) : setSelectBox(true);
   };
 
   const handleOptionItem = (optionItem) => {
-    SetSelectItemName(optionItem);
+    setSelectItemName(optionItem);
+    setSortOrder(SORT[optionItem]);
     setSelectBox(false);
   };
 

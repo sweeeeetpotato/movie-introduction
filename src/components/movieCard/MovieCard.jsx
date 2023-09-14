@@ -3,12 +3,7 @@ import { useNavigate } from "react-router-dom";
 import rating_icon from "../../assets/rating-icon.png";
 import styles from "./movieCard.module.css";
 
-export default function MovieCard({
-  mode,
-  data,
-  sliderStyle,
-  query,
-}) {
+export default function MovieCard({ mode, data, sliderStyle, query, forwardedRef }) {
   const navigate = useNavigate();
   const handleMovieClick = (movieId) => {
     navigate(`/detail/${movieId}`);
@@ -17,7 +12,7 @@ export default function MovieCard({
   const MOVIEDATA = {
     grid: data?.movies,
     carousel: data,
-    search: data?.movies,
+    search: data,
   };
 
   const renderSearchTitle = (movie) => {
@@ -44,6 +39,7 @@ export default function MovieCard({
       onClick={() => {
         handleMovieClick(movie.id);
       }}
+      ref={forwardedRef}
     >
       <img
         src={movie.medium_cover_image}

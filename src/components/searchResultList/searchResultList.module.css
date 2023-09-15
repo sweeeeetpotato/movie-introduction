@@ -10,18 +10,10 @@
   font-size: 2rem;
   font-style: italic;
   line-height: 2;
-  margin: 100px auto 0;
+  margin-top: 10%;
+  text-align: center;
 }
-.movie_box {
-  flex: 0 0 230px;
-  width: 230px;
-  height: 400px;
-  cursor: pointer;
-}
-.movie_img {
-  border-radius: 10px;
-}
-.movie_title {
-  font-weight: bold;
-  margin-top: 10px;
+.count_text {
+  font-size: 1.3rem;
+  padding: 50px 100px 0;
 }

@@ -9,7 +9,7 @@ export default function SearchResultMain() {
   const queryParams = new URLSearchParams(location.search);
   const query = queryParams.get("query");
   const [pageIndex, setPageIndex] = useState(1);
-  const API_URL = `https://yts.mx/api/v2/list_movies.json?minimum_rating=3&sort_by=rating&limit=50&query_term=${query}&page=${pageIndex}`;
+  const API_URL = `https://yts.mx/api/v2/list_movies.json?minimum_rating=0&sort_by=rating&limit=50&query_term=${query}&page=${pageIndex}`;
   const { data, isLoading, error } = useMovieSWR(API_URL);
 
   useEffect(() => {

@@ -6,7 +6,7 @@ import styles from "./searchResultList.module.css";
 
 export default function SearchResultList({ data, query, setPageIndex }) {
   const navigate = useNavigate();
-  const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.3 });
+  const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.1 });
   const [searchedData, setSearchedData] = useState([]);
 
   useEffect(() => {
@@ -37,20 +37,21 @@ export default function SearchResultList({ data, query, setPageIndex }) {
     }
   }, [inView, setPageIndex]);
 
-  return (
-    <section className={styles.container}>
-      {!searchedData.length ? (
-        <p className={styles.result_text}>
-          입력하신 검색어 '{query}'(와)과 일치하는 결과가 없습니다.
-        </p>
-      ) : (
+  return !searchedData.length ? (
+    <p className={styles.result_text}>
+      입력하신 검색어 '{query}'(와)과 일치하는 결과가 없습니다.
+    </p>
+  ) : (
+    <>
+      <p className={styles.count_text}>검색 결과 : 총 {data?.movie_count}개</p>
+      <section className={styles.container}>
         <MovieCard
           mode={"search"}
           data={searchedData}
           query={query}
           forwardedRef={ref}
         />
-      )}
-    </section>
+      </section>
+    </>
   );
 }

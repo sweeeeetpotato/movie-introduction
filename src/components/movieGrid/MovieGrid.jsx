@@ -5,6 +5,7 @@ import SelectBox from "components/selectBox/SelectBox";
 import styles from "./movieGrid.module.css";
 
 export default function MovieGrid({
+  API_URL,
   data,
   pageIndex,
   setPageIndex,
@@ -20,6 +21,7 @@ export default function MovieGrid({
         <MovieCard mode={"grid"} data={data} pageIndex={pageIndex} />
       </section>
       <Pagination
+        API_URL={API_URL}
         movieCount={data?.movie_count}
         pageIndex={pageIndex}
         setPageIndex={setPageIndex}

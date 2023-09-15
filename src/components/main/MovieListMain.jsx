@@ -18,6 +18,7 @@ export default function MovieListMain() {
         <p className={`${styles.loading_text} ${styles.text}`}>Loading...</p>
       ) : (
         <MovieGrid
+          API_URL={API_URL}
           data={data}
           pageIndex={pageIndex}
           setPageIndex={setPageIndex}

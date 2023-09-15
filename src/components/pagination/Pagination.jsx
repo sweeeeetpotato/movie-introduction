@@ -1,11 +1,18 @@
 import React from "react";
+import { preload } from "swr";
+import { fetcher } from "customHook/useMovieSWR";
 import styles from "./pagination.module.css";
 import leftArrow from "../../assets/page-left-arrow.png";
 import farLeftArrow from "../../assets/page-far-left-arrow.png";
 import rightArrow from "../../assets/page-right-arrow.png";
 import farRightArrow from "../../assets/page-far-right-arrow.png";
 
-export default function Pagination({ movieCount, pageIndex, setPageIndex }) {
+export default function Pagination({
+  API_URL,
+  movieCount,
+  pageIndex,
+  setPageIndex,
+}) {
   const pageCount = Math.ceil(movieCount / 20);
   const handlePageBtn = (index) => {
     setPageIndex(index);
@@ -38,6 +45,7 @@ export default function Pagination({ movieCount, pageIndex, setPageIndex }) {
             pageIndex === i && styles.activePageBtn
           }`}
           onClick={() => handlePageBtn(i)}
+          onMouseEnter={() => preload(API_URL + i, fetcher)}
         >
           {i}
         </button>

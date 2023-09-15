@@ -3,7 +3,13 @@ import { useNavigate } from "react-router-dom";
 import rating_icon from "../../assets/rating-icon.png";
 import styles from "./movieCard.module.css";
 
-export default function MovieCard({ mode, data, sliderStyle, query, forwardedRef }) {
+export default function MovieCard({
+  mode,
+  data,
+  sliderStyle,
+  query,
+  forwardedRef,
+}) {
   const navigate = useNavigate();
   const handleMovieClick = (movieId) => {
     navigate(`/detail/${movieId}`);
@@ -18,7 +24,9 @@ export default function MovieCard({ mode, data, sliderStyle, query, forwardedRef
   const renderSearchTitle = (movie) => {
     const index = movie.title.toLowerCase().indexOf(query.toLowerCase());
 
-    return (
+    return index === -1 ? (
+      movie.title
+    ) : (
       <>
         {movie.title.substr(0, index)}
         <span className={styles.searchTerm}>

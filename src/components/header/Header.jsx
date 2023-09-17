@@ -3,25 +3,27 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import Menu from "components/menu/Menu";
 import styles from "./header.module.css";
 import close from "../../assets/close.png";
+import search from "../../assets/search-icon.png";
 
 export default function Header() {
   const navigate = useNavigate();
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const query = queryParams.get("query");
-  const [searchTerm, setSearchTerm] = useState("");
   const inputRef = useRef(null);
+  const [inputFocus, setInputFocus] = useState(
+    query || location.state?.isFocus ? true : false
+  );
 
   const handleSearch = (searchTerm) => {
-    setSearchTerm(searchTerm);
     navigate(`/search?query=${encodeURIComponent(searchTerm)}`);
   };
 
   useEffect(() => {
-    if (query) {
-      inputRef.current.focus();
+    if (query || location.state?.isFocus) {
+      inputRef.current?.focus();
     }
-  }, [query]);
+  }, [query, location.state?.isFocus]);
 
   return (
     <header className={styles.header}>
@@ -29,24 +31,34 @@ export default function Header() {
         FILMFLIX
       </Link>
       <Menu />
-      <label htmlFor="search" className={styles.inputBox}>
-        <input
-          type="text"
-          className={styles.input}
-          placeholder="검색어를 입력하세요."
-          value={query ? query : searchTerm}
-          onChange={(e) => handleSearch(e.target.value)}
-          ref={inputRef}
-          id="search"
-        />
+      {!inputFocus ? (
         <button
           type="button"
-          className={styles.closeBtn}
-          onClick={() => navigate("/")}
+          className={styles.searchBtn}
+          onClick={() => setInputFocus(true)}
         >
-          <img src={close} alt="검색어 지우기" className={styles.closeImg} />
+          <img src={search} alt="영화검색" className={styles.searchImg} />
         </button>
-      </label>
+      ) : (
+        <label htmlFor="search" className={styles.inputBox}>
+          <input
+            type="text"
+            className={styles.input}
+            placeholder="영화 제목을 입력하세요."
+            value={query ? query : ""}
+            onChange={(e) => handleSearch(e.target.value)}
+            ref={inputRef}
+            id="search"
+          />
+          <button
+            type="button"
+            className={styles.closeBtn}
+            onClick={() => navigate("/", { state: { isFocus: true } })}
+          >
+            <img src={close} alt="검색어 지우기" className={styles.closeImg} />
+          </button>
+        </label>
+      )}
     </header>
   );
 }

@@ -10,7 +10,7 @@ export default function SearchResultList({ data, query, setPageIndex }) {
   const [searchedData, setSearchedData] = useState([]);
 
   useEffect(() => {
-    !query && navigate("/");
+    !query && navigate("/", { state: { isFocus: true } });
   });
 
   useEffect(() => {

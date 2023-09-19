@@ -1,6 +1,7 @@
 import React from "react";
 import { preload } from "swr";
 import { fetcher } from "customHook/useMovieSWR";
+import movieListStore from "store/movieListStore";
 import styles from "./pagination.module.css";
 import leftArrow from "../../assets/page-left-arrow.png";
 import farLeftArrow from "../../assets/page-far-left-arrow.png";
@@ -8,12 +9,14 @@ import rightArrow from "../../assets/page-right-arrow.png";
 import farRightArrow from "../../assets/page-far-right-arrow.png";
 
 export default function Pagination({
-  API_URL,
-  movieCount,
+  movieTotalCount,
   pageIndex,
   setPageIndex,
 }) {
-  const pageCount = Math.ceil(movieCount / 20);
+  const { API_URL, movieCount, movieCountList } = movieListStore();
+  const count =
+    movieCount === "페이지당 항목수" ? 20 : movieCountList[movieCount];
+  const pageCount = Math.ceil(movieTotalCount / count);
   const handlePageBtn = (index) => {
     setPageIndex(index);
   };
@@ -45,7 +48,7 @@ export default function Pagination({
             pageIndex === i && styles.activePageBtn
           }`}
           onClick={() => handlePageBtn(i)}
-          onMouseEnter={() => preload(API_URL + i, fetcher)}
+          onMouseEnter={() => preload(API_URL() + i, fetcher)}
         >
           {i}
         </button>

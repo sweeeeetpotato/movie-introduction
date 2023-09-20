@@ -1,17 +1,20 @@
 import React, { useState } from "react";
 import styles from "./selectBox.module.css";
+import movieListStore from "store/movieListStore";
 
 export default function SelectBox({
   selectName,
   selectNameUpdate,
   selectList,
 }) {
+  const { pageIndexUpdate } = movieListStore();
   const [isSelectBox, setSelectBox] = useState(false);
   const handleSelectBox = () => {
     isSelectBox ? setSelectBox(false) : setSelectBox(true);
   };
 
   const handleOptionItem = (optionItem) => {
+    selectName !== optionItem && pageIndexUpdate(1);
     selectNameUpdate(optionItem);
     setSelectBox(false);
   };

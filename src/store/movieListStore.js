@@ -17,6 +17,7 @@ const movieListStore = create((set, getState) => ({
     "50개": 50,
   },
   movieApiProps: ["year", "desc", "20"],
+  pageIndex: 1,
   API_URL: () =>
     `https://yts.mx/api/v2/list_movies.json?minimum_rating=7&sort_by=${
       getState().movieApiProps[0]
@@ -27,6 +28,7 @@ const movieListStore = create((set, getState) => ({
   movieCountUpdate: (name) => set({ movieCount: name }),
   movieApiPropsUpdate: (sort, count) =>
     set({ movieApiProps: [...sort, count] }),
+  pageIndexUpdate: (num) => set({ pageIndex: num }),
 }));
 
 export default movieListStore;

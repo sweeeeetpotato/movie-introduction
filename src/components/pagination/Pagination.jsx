@@ -8,17 +8,14 @@ import farLeftArrow from "../../assets/page-far-left-arrow.png";
 import rightArrow from "../../assets/page-right-arrow.png";
 import farRightArrow from "../../assets/page-far-right-arrow.png";
 
-export default function Pagination({
-  movieTotalCount,
-  pageIndex,
-  setPageIndex,
-}) {
-  const { API_URL, movieCount, movieCountList } = movieListStore();
+export default function Pagination({ movieTotalCount }) {
+  const { API_URL, movieCount, movieCountList, pageIndex, pageIndexUpdate } =
+    movieListStore();
   const count =
     movieCount === "페이지당 항목수" ? 20 : movieCountList[movieCount];
   const pageCount = Math.ceil(movieTotalCount / count);
   const handlePageBtn = (index) => {
-    setPageIndex(index);
+    pageIndexUpdate(index);
   };
 
   const renderMoveButtons = ({ src, alt, onClick }) => {
@@ -62,14 +59,16 @@ export default function Pagination({
       {renderMoveButtons({
         src: farLeftArrow,
         alt: "맨앞 페이지",
-        onClick: () => setPageIndex(1),
+        onClick: () => pageIndexUpdate(1),
       })}
       {renderMoveButtons({
         src: leftArrow,
         alt: "이전 페이지",
         onClick: () =>
-          setPageIndex((prev) =>
-            prev === 1 ? prev : Math.floor((prev - 10) / 10) * 10 + 1
+          pageIndexUpdate(
+            pageIndex === 1
+              ? pageIndex
+              : Math.floor((pageIndex - 10) / 10) * 10 + 1
           ),
       })}
       {renderPageButtons()}
@@ -77,14 +76,16 @@ export default function Pagination({
         src: rightArrow,
         alt: "다음 페이지",
         onClick: () =>
-          setPageIndex((prev) =>
-            prev === pageCount ? prev : Math.floor((prev + 10) / 10) * 10 + 1
+          pageIndexUpdate(
+            pageIndex === pageCount
+              ? pageIndex
+              : Math.floor((pageIndex + 10) / 10) * 10 + 1
           ),
       })}
       {renderMoveButtons({
         src: farRightArrow,
         alt: "맨뒤 페이지",
-        onClick: () => setPageIndex(pageCount),
+        onClick: () => pageIndexUpdate(pageCount),
       })}
     </div>
   );

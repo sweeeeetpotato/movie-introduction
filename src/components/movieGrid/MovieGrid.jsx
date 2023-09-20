@@ -1,11 +1,11 @@
 import React, { useEffect } from "react";
+import movieListStore from "store/movieListStore";
 import MovieCard from "components/movieCard/MovieCard";
 import Pagination from "components/pagination/Pagination";
 import SelectBox from "components/selectBox/SelectBox";
 import styles from "./movieGrid.module.css";
-import movieListStore from "store/movieListStore";
 
-export default function MovieGrid({ data, pageIndex, setPageIndex }) {
+export default function MovieGrid({ data }) {
   const {
     movieSort,
     movieSortList,
@@ -22,6 +22,7 @@ export default function MovieGrid({ data, pageIndex, setPageIndex }) {
     const count =
       movieCount === "페이지당 항목수" ? 20 : movieCountList[movieCount];
     movieApiPropsUpdate(sort, count);
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [movieSort, movieCount]);
 
@@ -41,13 +42,9 @@ export default function MovieGrid({ data, pageIndex, setPageIndex }) {
         />
       </div>
       <section className={styles.container}>
-        <MovieCard mode={"grid"} data={data} pageIndex={pageIndex} />
+        <MovieCard mode={"grid"} data={data} />
       </section>
-      <Pagination
-        movieTotalCount={data?.movie_count}
-        pageIndex={pageIndex}
-        setPageIndex={setPageIndex}
-      />
+      <Pagination movieTotalCount={data?.movie_count} />
     </>
   );
 }

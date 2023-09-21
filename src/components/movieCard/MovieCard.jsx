@@ -27,6 +27,7 @@ export default function MovieCard({
     grid: data?.movies,
     carousel: data,
     search: data,
+    watchList: data && Object.values(data),
   };
 
   const renderSearchTitle = (movie) => {

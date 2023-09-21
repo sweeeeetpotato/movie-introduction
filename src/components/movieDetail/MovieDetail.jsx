@@ -1,12 +1,16 @@
 import React from "react";
 import { useParams } from "react-router-dom";
+import watchListStore from "store/watchListStore";
 import rating_icon from "../../assets/rating-icon.png";
 import MovieSuggestions from "components/movieSuggestions/MovieSuggestions";
 import { useMovieSWR } from "customHook/useMovieSWR";
 import styles from "./movieDetail.module.css";
+import plus from "../../assets/plus-icon.png";
+import check from "../../assets/check-icon.png";
 
 export default function MovieDetail() {
   const { movieId } = useParams();
+  const { movies, moviesUpdate } = watchListStore();
   const API_URL = `https://yts.mx/api/v2/movie_details.json?movie_id=${movieId}`;
   const { data, isLoading, error } = useMovieSWR(API_URL);
 
@@ -46,6 +50,22 @@ export default function MovieDetail() {
             <p className={styles.description_text}>
               {data.movie.description_full}
             </p>
+            <div className={styles.addWatchList_box}>
+              <button
+                type="button"
+                className={styles.plus_btn}
+                onClick={() => moviesUpdate(data.movie.id, data.movie)}
+              >
+                <img
+                  src={movies.hasOwnProperty(data.movie.id) ? check : plus}
+                  alt="영화 찜하기"
+                  className={styles.plus_img}
+                />
+              </button>
+              <span>
+                {movies.hasOwnProperty(data.movie.id) ? "찜 취소" : "찜하기"}
+              </span>
+            </div>
           </div>
           <MovieSuggestions movieId={movieId} />
         </>

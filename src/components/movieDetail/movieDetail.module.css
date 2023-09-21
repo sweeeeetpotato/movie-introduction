@@ -26,13 +26,13 @@
   border-radius: 10px;
 }
 .content_wrapper {
+  position: relative;
   min-width: 350px;
   width: 50%;
   height: 525px;
-  padding: 20px 0;
+  padding: 20px 100px 20px 0;
   box-sizing: border-box;
   display: flex;
-  margin-right: 100px;
   flex-direction: column;
   gap: 20px;
   color: whitesmoke;
@@ -73,4 +73,28 @@
   text-overflow: ellipsis;
   -webkit-line-clamp: 10;
   -webkit-box-orient: vertical;
+}
+.addWatchList_box {
+  position: absolute;
+  top: 20px;
+  right: 0;
+  width: 60px;
+  height: auto;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+.plus_btn {
+  width: 40px;
+  height: 40px;
+  opacity: 0.7;
+}
+.plus_btn:hover {
+  opacity: 1;
+}
+.plus_img {
+  width: 40px;
+  height: 40px;
 }

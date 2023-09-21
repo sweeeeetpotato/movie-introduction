@@ -25,7 +25,13 @@ export default function Menu() {
           </button>
         </li>
         <li>
-          <button type="button" className={styles.btn}>
+          <button
+            type="button"
+            className={`${styles.btn} ${
+              location.state?.activeMenu === "watchList" && styles.activeBtn
+            }`}
+            onClick={() => handleMenuBtn("/watchList")}
+          >
             내가 찜한 컨텐츠
           </button>
         </li>

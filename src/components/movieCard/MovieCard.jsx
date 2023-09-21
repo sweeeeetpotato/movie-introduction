@@ -1,7 +1,10 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import rating_icon from "../../assets/rating-icon.png";
+import watchListStore from "store/watchListStore";
 import styles from "./movieCard.module.css";
+import rating_icon from "../../assets/rating-icon.png";
+import plus from "../../assets/plus-icon.png";
+import check from "../../assets/check-icon.png";
 
 export default function MovieCard({
   mode,
@@ -11,8 +14,13 @@ export default function MovieCard({
   forwardedRef,
 }) {
   const navigate = useNavigate();
+  const { movies, moviesUpdate } = watchListStore();
   const handleMovieClick = (movieId) => {
     navigate(`/detail/${movieId}`);
+  };
+  const handleWatchlistClick = (e, movie) => {
+    e.stopPropagation();
+    moviesUpdate(movie.id, movie);
   };
 
   const MOVIEDATA = {
@@ -59,6 +67,17 @@ export default function MovieCard({
           (e.target.src = `https://dummyimage.com/230x345&text=${movie.title}`)
         }
       />
+      <button
+        type="button"
+        className={styles.plus_btn}
+        onClick={(e) => handleWatchlistClick(e, movie)}
+      >
+        <img
+          src={movies.hasOwnProperty(movie.id) ? check : plus}
+          alt="영화 찜하기"
+          className={styles.plus_img}
+        />
+      </button>
       <p className={styles.movie_title}>
         {mode === "search" ? renderSearchTitle(movie) : movie.title}
       </p>

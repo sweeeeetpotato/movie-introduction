@@ -18,7 +18,7 @@ export default function Pagination({ movieTotalCount }) {
     pageIndexUpdate(index);
   };
 
-  const renderMoveButtons = ({ src, alt, onClick }) => {
+  const renderMoveButtons = ({ src, alt, onClick, onMouseEnter }) => {
     return (
       <button type="button" className={styles.moveBtn}>
         <img
@@ -26,6 +26,7 @@ export default function Pagination({ movieTotalCount }) {
           alt={alt}
           className={styles.arrowImg}
           onClick={onClick}
+          onMouseEnter={onMouseEnter}
         />
       </button>
     );
@@ -70,6 +71,11 @@ export default function Pagination({ movieTotalCount }) {
               ? pageIndex
               : Math.floor((pageIndex - 10) / 10) * 10 + 1
           ),
+        onMouseEnter: () =>
+          preload(
+            API_URL() + (Math.floor((pageIndex - 10) / 10) * 10 + 1),
+            fetcher
+          ),
       })}
       {renderPageButtons()}
       {renderMoveButtons({
@@ -81,11 +87,17 @@ export default function Pagination({ movieTotalCount }) {
               ? pageIndex
               : Math.floor((pageIndex + 10) / 10) * 10 + 1
           ),
+        onMouseEnter: () =>
+          preload(
+            API_URL() + (Math.floor((pageIndex + 10) / 10) * 10 + 1),
+            fetcher
+          ),
       })}
       {renderMoveButtons({
         src: farRightArrow,
         alt: "맨뒤 페이지",
         onClick: () => pageIndexUpdate(pageCount),
+        onMouseEnter: () => preload(API_URL() + pageCount, fetcher),
       })}
     </div>
   );

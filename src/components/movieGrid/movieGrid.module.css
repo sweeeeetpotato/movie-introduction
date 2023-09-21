@@ -18,3 +18,16 @@
   font-weight: bold;
   margin-right: auto;
 }
+.bottom {
+  width: 980px;
+  margin: 60px auto 0;
+  position: relative;
+}
+.pageCount {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translate(0, -50%);
+  color: rgb(180, 180, 180);
+  font-size: 0.9rem;
+}

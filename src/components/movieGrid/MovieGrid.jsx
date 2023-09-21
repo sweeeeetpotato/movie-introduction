@@ -15,6 +15,8 @@ export default function MovieGrid({ data }) {
     movieCountUpdate,
     movieApiPropsUpdate,
   } = movieListStore();
+  const count =
+    movieCount === "페이지당 항목수" ? 20 : movieCountList[movieCount];
 
   useEffect(() => {
     const sort =
@@ -44,7 +46,12 @@ export default function MovieGrid({ data }) {
       <section className={styles.container}>
         <MovieCard mode={"grid"} data={data} />
       </section>
-      <Pagination movieTotalCount={data?.movie_count} />
+      <div className={styles.bottom}>
+        <Pagination movieTotalCount={data?.movie_count} />
+        <span className={styles.pageCount}>
+          총 페이지수 : {Math.ceil(data?.movie_count / count)}개
+        </span>
+      </div>
     </>
   );
 }

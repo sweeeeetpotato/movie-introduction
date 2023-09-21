@@ -1,9 +1,14 @@
 import React from "react";
 import styles from "./menu.module.css";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 export default function Menu() {
   const navigation = useNavigate();
+  const location = useLocation();
+
+  const handleMenuBtn = (path) => {
+    navigation(path, { state: { activeMenu: path.substring(1) } });
+  };
 
   return (
     <nav>
@@ -11,8 +16,10 @@ export default function Menu() {
         <li>
           <button
             type="button"
-            className={styles.btn}
-            onClick={() => navigation("/movieList")}
+            className={`${styles.btn} ${
+              location.state?.activeMenu === "movieList" && styles.activeBtn
+            }`}
+            onClick={() => handleMenuBtn("/movieList")}
           >
             영화 목록
           </button>

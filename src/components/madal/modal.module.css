@@ -1,0 +1,56 @@
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(19, 19, 19, 0.6);
+  z-index: 10;
+}
+.modalBox {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 300px;
+  padding: 40px 60px 30px;
+  border-radius: 10px;
+  background-color: white;
+  z-index: 20;
+  text-align: center;
+  box-shadow: 0 0 10px 3px rgba(0, 0, 0, 0.6);
+}
+.text {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 30px;
+}
+.btn {
+  width: auto;
+  padding: 10px 40px;
+  margin: 0 10px;
+  border-radius: 5px;
+  font-weight: bold;
+  opacity: 0.8;
+}
+.btn:hover {
+  opacity: 1;
+}
+.cancel_btn {
+  background-color: rgba(196, 196, 196);
+}
+.remove_btn {
+  background-color: red;
+  color: white;
+}
+.close_btn {
+  width: 20px;
+  height: 20px;
+}
+.close_img {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 20px;
+  height: 20px;
+}

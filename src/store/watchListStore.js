@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { persist, createJSONStorage } from "zustand/middleware";
+import { persist } from "zustand/middleware";
 
 const watchListStore = create(
   persist(
@@ -16,10 +16,10 @@ const watchListStore = create(
           set({ movies: updatedMovies });
         }
       },
+      moviesAllRemove: () => set({ movies: {} }),
     }),
     {
       name: "myWatchList",
-      storage: createJSONStorage(() => sessionStorage),
     }
   )
 );
